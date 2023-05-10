@@ -1,7 +1,8 @@
 project ('app','cpp', version : '0.1' , default_options: ['default_library=static',])
-
-vcpkg = find_program('vcpkg', required : true)
-run_command(vcpkg, 'install' , check: true)
+if host_machine.system() == 'darwin'
+  vcpkg = find_program('vcpkg', required : true)
+  run_command('$HOME/.vcpkg/vcpkg', 'install' , check: true)
+endif
 
 wxdep = dependency(
    'wxWidgets',
