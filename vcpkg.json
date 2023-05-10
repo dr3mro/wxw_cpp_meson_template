@@ -1,0 +1,9 @@
+{
+  "name": "meson-vcpkg",
+  "version": "1",
+  "description": "CPP wxwidgets template",
+  "dependencies": [
+    "wxwidgets"
+  ]
+}
+
