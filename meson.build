@@ -17,5 +17,5 @@ sources = [
           'src/application.cpp',
           'src/mainwindow.cpp' 
   ]
-executable('application',sources ,dependencies : [wxdep] ) 
+executable(meson.project_name(),sources ,dependencies : [wxdep] ) 
 
