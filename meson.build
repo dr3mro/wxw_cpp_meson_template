@@ -1,4 +1,4 @@
-project ('app','cpp', version : '0.1' , default_options: ['default_library=static',])
+project ('application','cpp', version : '0.1' , default_options: ['default_library=static',])
 if host_machine.system() == 'darwin'
   vcpkg = find_program('vcpkg', required : true)
   run_command(vcpkg , 'install' , check: true)
@@ -13,5 +13,9 @@ wxdep = dependency(
    ]
 )
 
-executable('app', 'main.cpp' ,dependencies : [wxdep] ) 
+sources = [
+          'src/application.cpp',
+          'src/mainwindow.cpp' 
+  ]
+executable('application',sources ,dependencies : [wxdep] ) 
 
