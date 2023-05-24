@@ -1,10 +1,11 @@
-project ('application','cpp', version : '0.1' , default_options: ['default_library=static',])
+project ('application','cpp', version : '0.1' , 
+        default_options: ['default_library=shared'])
 if host_machine.system() == 'darwin'
   vcpkg = find_program('vcpkg', required : true)
   run_command(vcpkg , 'install' , check: true)
 endif
 
-wxdep = dependency(
+wx_dep = dependency(
    'wxWidgets',
    version : '>=3.0.0',
    modules : [
@@ -12,10 +13,12 @@ wxdep = dependency(
       'core'
    ]
 )
-
+subdir('./src/gui')
 sources = [
           'src/application.cpp',
-          'src/mainwindow.cpp' 
+          # 'src/gui/mainwindow.cpp' 
   ]
-executable(meson.project_name(),sources ,dependencies : [wxdep] ) 
+executable(meson.project_name(),sources ,dependencies: [wx_dep, libmainwindow_dep],
+          install: true,
+          build_rpath : '.') 
 

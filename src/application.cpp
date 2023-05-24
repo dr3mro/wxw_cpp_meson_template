@@ -1,21 +1,30 @@
 #include <wx/wx.h>
-#include "application.hpp"
+#include "gui/mainwindow.hpp"
 
 
-wxIMPLEMENT_APP(Application);
+class Application : public wxApp {
 
-
-bool Application::OnInit(){
+public:
   
-  mainwindow = new MainWindow("Main Application window");
-  mainwindow->Show();
+  bool OnInit(){
+    
+    mainwindow = new MainWindow("Main Application window");
+    mainwindow->Show();
 
   return true;
-}
 
+  }
 
-Application::Application(){
-}
+  Application(){
 
-Application::~Application(){
-}
+  }
+  ~Application(){
+
+  }
+
+private:
+  MainWindow *mainwindow; 
+
+};
+
+wxIMPLEMENT_APP(Application);
