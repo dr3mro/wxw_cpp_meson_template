@@ -21,6 +21,6 @@ sources = [
 executable(meson.project_name(),sources ,
 dependencies: [wx_dep, libmainwindow_dep],
           install: true,
-          install_rpath: './libs/',
-          build_rpath : './libs/')
+          install_rpath: '.',
+          build_rpath : '.')
 
