@@ -18,7 +18,9 @@ sources = [
           'src/application.cpp',
           # 'src/gui/mainwindow.cpp' 
   ]
-executable(meson.project_name(),sources ,dependencies: [wx_dep, libmainwindow_dep],
+executable(meson.project_name(),sources ,
+dependencies: [wx_dep, libmainwindow_dep],
           install: true,
-          build_rpath : '.') 
+          install_rpath: './libs/',
+          build_rpath : './libs/')
 
