@@ -14,13 +14,12 @@ wx_dep = dependency(
    ]
 )
 subdir('./src/gui')
+
 sources = [
           'src/application.cpp',
-          # 'src/gui/mainwindow.cpp' 
   ]
 executable(meson.project_name(),sources ,
-dependencies: [wx_dep, libmainwindow_dep],
+          dependencies: [wx_dep, libmainwindow_dep],
           install: true,
-          install_rpath: '.',
-          build_rpath : '.')
+          )
 

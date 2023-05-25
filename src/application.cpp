@@ -1,5 +1,5 @@
 #include <wx/wx.h>
-#include "gui/mainwindow.hpp"
+#include "gui/mainwindow/mainwindow.hpp"
 
 
 class Application : public wxApp {
