@@ -1,6 +1,11 @@
 project ('application','cpp', version : '0.1' , 
         default_options: ['default_library=shared'])
 
+if host_machine.system() == 'linux'
+  add_project_link_arguments('-Wl,--rpath,../lib64/',language:'cpp')
+endif
+
+
 if host_machine.system() == 'darwin'
   vcpkg = find_program('vcpkg', required : true)
   run_command(vcpkg , 'install' , check: true)
@@ -22,11 +27,10 @@ subdir('./src/gui')
 sources = [
           'src/application.cpp',
   ]
+
 executable = executable(meson.project_name(),sources ,
           dependencies: [wx_dep, libmainwindow_dep],
           install: true,
           gui_app: true,
           )
-if host_machine.system() == 'linux'
-  add_project_link_arguments('-Wl,--rpath,../lib64/')
-endif
+
