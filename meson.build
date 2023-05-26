@@ -8,7 +8,6 @@ if host_machine.system() == 'darwin'
   install_data('resources/macos/Info.plist', install_dir : 'Contents')
 endif
 
-
 wx_dep = dependency(
    'wxWidgets',
    version : '>=3.0.0',
@@ -17,7 +16,6 @@ wx_dep = dependency(
       'core'
    ]
 )
-
 
 subdir('./src/gui')
 
@@ -28,5 +26,7 @@ executable = executable(meson.project_name(),sources ,
           dependencies: [wx_dep, libmainwindow_dep],
           install: true,
           gui_app: true,
-          link_args : '-Wl,--rpath,../lib64/',
           )
+if host_machine.system() == 'linux'
+  add_project_link_arguments('-Wl,--rpath,../lib64/')
+endif
