@@ -5,7 +5,7 @@ class Application : public wxApp {
 public:
   
   bool OnInit(){
-    wxApp::SetExitOnFrameDelete(false); 
+    wxApp::SetExitOnFrameDelete(true); 
     mainwindow = new MainWindow("Main Application window");
     mainwindow->Show();
 

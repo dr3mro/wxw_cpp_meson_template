@@ -1,11 +1,13 @@
 project ('application','cpp', version : '0.1' , 
         default_options: ['default_library=shared'])
+
 if host_machine.system() == 'darwin'
   vcpkg = find_program('vcpkg', required : true)
   run_command(vcpkg , 'install' , check: true)
   install_data('resources/macos/icon.icns', install_dir : 'Contents/Resources')
   install_data('resources/macos/Info.plist', install_dir : 'Contents')
 endif
+
 
 wx_dep = dependency(
    'wxWidgets',
@@ -15,14 +17,15 @@ wx_dep = dependency(
       'core'
    ]
 )
+
+
 subdir('./src/gui')
 
 sources = [
           'src/application.cpp',
   ]
-executable(meson.project_name(),sources ,
+executable = executable(meson.project_name(),sources ,
           dependencies: [wx_dep, libmainwindow_dep],
           install: true,
           gui_app: true,
           )
-
