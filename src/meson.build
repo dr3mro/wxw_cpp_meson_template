@@ -1,5 +1,5 @@
 subdir('./gui')
-
+subdir('./core')
 wx_dep = dependency(
    'wxWidgets',
    version : '>=3.0.0',

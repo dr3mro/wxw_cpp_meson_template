@@ -3,7 +3,8 @@
   "version": "1",
   "description": "CPP wxwidgets template",
   "dependencies": [
-    	"wxwidgets"
+    	"wxwidgets",
+      "sqlitecpp"
   ]
 }
 
