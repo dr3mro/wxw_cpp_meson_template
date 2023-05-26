@@ -15,7 +15,7 @@ if [[ $OSTYPE == 'darwin'* ]]
   
   mkdir -p "$package"
   
-  if [ -d "$build_dir" ] &&  cd _build && meson compile && meson install  
+  if [ -d "$build_dir" ] &&  cd _build && meson compile && meson install --skip-subprojects 
     then
       if [ "$1" == "run" ] 
         then
