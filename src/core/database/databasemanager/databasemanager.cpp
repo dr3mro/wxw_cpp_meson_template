@@ -1,5 +1,5 @@
 #include "databasemanager.hpp"
-
+#include <sqlite3.h>
 #include <stdio.h>
 
 DatabaseManager::DatabaseManager() {

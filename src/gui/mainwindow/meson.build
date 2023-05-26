@@ -9,7 +9,6 @@ wxdep = dependency(
 )
 
 if host_machine.system() == 'darwin'
-
   libMainWindow_static = static_library('mainwindow', 
           sources: ['mainwindow.cpp'], 
           dependencies: wxdep,
@@ -25,5 +24,5 @@ else
           link_args : '-Wl,--rpath,.',
           )
 
-  libMainWindow_dep = declare_dependency(include_directories: ['.'], link_with : libMainMindow_shared)
+  libMainWindow_dep = declare_dependency(include_directories: ['.'], link_with : libMainWindow_shared)
 endif

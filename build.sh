@@ -48,7 +48,7 @@ else
         if [ "$1" == "run" ]
           then
             mkdir -p "$build_dir/output/usr/local/lib" 
-            if meson install --destdir="$build_dir/output" 
+            if meson install --destdir="$build_dir/output" --skip-subprojects 
               then
                 cd "$build_dir/output/usr/local/bin"
                 ldd ./application | awk 'NF == 4 { system("cp " $3 " ../lib64/") }' 
