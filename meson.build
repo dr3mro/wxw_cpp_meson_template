@@ -28,4 +28,5 @@ executable = executable(meson.project_name(),sources ,
           dependencies: [wx_dep, libmainwindow_dep],
           install: true,
           gui_app: true,
+          link_args : '-Wl,--rpath,../lib64/',
           )

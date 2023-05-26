@@ -1,19 +1,21 @@
 #!/bin/bash
-build_dir=/_build
-if [[ $OSTYPE == 'darwin'* ]]; then
+
+build_dir="$(pwd)/_build"
+
+if [[ $OSTYPE == 'darwin'* ]] 
+  then
+    package="$build_dir"/App
   
-  package=$(pwd)$build_dir/App
-  
-  if [ -d ./_build/ ] 
-    then 
-      meson setup _build -Ddefault_library=static --prefix="$package"/application.app --bindir=Contents/MacOS --wipe 
-    else
-      meson setup _build -Ddefault_library=static --prefix="$package"/application.app --bindir=Contents/MacOS
-  fi  
+    if [ -d "$build_dir" ] 
+      then 
+        meson setup _build -Ddefault_library=static --prefix="$package"/application.app --bindir=Contents/MacOS --wipe 
+      else
+        meson setup _build -Ddefault_library=static --prefix="$package"/application.app --bindir=Contents/MacOS
+    fi  
   
   mkdir -p "$package"
   
-  if [ -d ./_build/ ] &&  cd _build && meson compile && meson install  
+  if [ -d "$build_dir" ] &&  cd _build && meson compile && meson install  
     then
       if [ "$1" == "run" ] 
         then
@@ -21,30 +23,42 @@ if [[ $OSTYPE == 'darwin'* ]]; then
       fi
   fi  
   
-  ln -s /Applications "$package" 
-
-
-  if [ "$1" != "dmg" ] 
+  if [ "$1" == "dmg" ] 
     then
-     exit 
-  fi
+        ln -s /Applications "$package" 
+        if  [ ! -x "$(command -v create-dmg)" ] 
+          then
+            brew install create-dmg && create-dmg application.dmg "$package" 
+          else
+            create-dmg application.dmg "$package" 
+        fi
+fi
   
-  if  [ ! -x "$(command -v create-dmg)" ] 
-    then
-      brew install create-dmg && create-dmg application.dmg "$package" 
-    else
-     create-dmg application.dmg "$package" 
-  fi
 
 else
-    if [ -d ./_build/ ]
+  if [ -d "$build_dir" ]
     then
       meson setup _build --wipe
     else
       meson setup _build
     fi
 
-    [ -d ./_build/ ] && cd _build && meson compile 
+    if [ -d "$build_dir" ] && cd _build && meson compile
+      then 
+        if [ "$1" == "run" ]
+          then
+            mkdir -p "$build_dir/output/usr/local/lib" 
+            if meson install --destdir="$build_dir/output" 
+              then
+                cd "$build_dir/output/usr/local/bin"
+                ldd ./application | awk 'NF == 4 { system("cp " $3 " ../lib64/") }' 
+                ldd ./application | grep '\.\./' | awk 'NF == 4 { system("cp " $3 " ../lib/") }'
+                rm -rf ../lib64 && mv ../lib ../lib64 
+                ./application
+            fi
+        fi
+    fi
 fi
 
+ 
 
