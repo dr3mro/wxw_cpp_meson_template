@@ -11,7 +11,7 @@ wx_dep = dependency(
 
 
 sources = [
-          'src/application.cpp',
+          'application.cpp',
   ]
 
 executable = executable(meson.project_name(),sources ,
