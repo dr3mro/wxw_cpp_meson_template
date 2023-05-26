@@ -1,4 +1,4 @@
-project ('application','cpp', version : '0.1')
+project ('application','cpp', version : '0.1', default_options : ['c_std=c11', 'cpp_std=c++17'])
 
 if host_machine.system() == 'linux'
   add_project_link_arguments('-Wl,--rpath,../lib64/',language:'cpp')

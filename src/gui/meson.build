@@ -1,1 +1,1 @@
-subdir('./mainwindow')
+subdir('mainwindow')

@@ -1,5 +1,6 @@
-subdir('./gui')
-subdir('./core')
+subdir('gui')
+subdir('core')
+
 wx_dep = dependency(
    'wxWidgets',
    version : '>=3.0.0',
@@ -15,7 +16,7 @@ sources = [
   ]
 
 executable = executable(meson.project_name(),sources ,
-          dependencies: [wx_dep, libmainwindow_dep],
+          dependencies: [wx_dep, libMainWindow_dep,libDatabaseManager_dep],
           install: true,
           gui_app: true,
           )

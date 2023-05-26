@@ -1,28 +1,25 @@
-#include <wx/wx.h>
 #include "gui/mainwindow/mainwindow.hpp"
+#include <wx/wx.h>
+
+#include "core/database/databasemanager/databasemanager.hpp"
+
 class Application : public wxApp {
 
 public:
-  
-  bool OnInit(){
-    wxApp::SetExitOnFrameDelete(true); 
+  bool OnInit() {
+    DatabaseManager dbm;
+    wxApp::SetExitOnFrameDelete(true);
     mainwindow = new MainWindow("Main Application window");
     mainwindow->Show();
 
-  return true;
-
+    return true;
   }
 
-  Application(){
-
-  }
-  ~Application(){
-
-  }
+  Application() {}
+  ~Application() {}
 
 private:
-  MainWindow *mainwindow; 
-
+  MainWindow *mainwindow;
 };
 
 wxIMPLEMENT_APP(Application);
