@@ -8,7 +8,7 @@ if host_machine.system() == 'darwin'
           install: true,
   )       
 else
-  libDatabaseManager = shared_library('mainwindow', 
+  libDatabaseManager = shared_library('databasemanager', 
           sources: ['databasemanager.cpp'], 
           dependencies: sqlite3_dep,
           install: true,
