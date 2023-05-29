@@ -9,10 +9,10 @@ wxdep = dependency(
 )
 
 if host_machine.system() == 'darwin'
-  libMainWindow = static_library('mainwindow', 
+  libMainWindow = shared_library('mainwindow', 
           sources: ['mainwindow.cpp'], 
           dependencies: wxdep,
-          install: false,
+          install: true,
           )
 else
   libMainWindow = shared_library('mainwindow', 
