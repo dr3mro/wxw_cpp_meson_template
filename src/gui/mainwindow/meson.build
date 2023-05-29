@@ -15,10 +15,10 @@ if host_machine.system() == 'darwin'
           install: false,
           )
 else
-  libMainWindow = static_library('mainwindow', 
+  libMainWindow = shared_library('mainwindow', 
           sources: ['mainwindow.cpp'], 
           dependencies: wxdep,
-          install: false,
+          install: true,
           link_args : '-Wl,--rpath,.',
           )
 endif
