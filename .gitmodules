@@ -1,3 +1,9 @@
 [submodule "vcpkg"]
 	path = vcpkg
 	url = https://github.com/Microsoft/vcpkg.git
+[submodule "wx-config"]
+	path = wx-config
+	url = https://github.com/Uskok/wx-config
+[submodule "wx-config-win"]
+	path = wx-config-win
+	url = https://github.com/kowey/wx-config-win.git
