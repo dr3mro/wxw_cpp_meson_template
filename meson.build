@@ -1,11 +1,11 @@
 project ('application','cpp', version : '0.1', default_options : ['c_std=c11', 'cpp_std=c++17'])
-
+message(host_machine.system())
 if host_machine.system() == 'windows'
   add_project_link_arguments('-DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake',language:'cpp')
   add_project_link_arguments('-DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake',language:'c')
   
-  add_global_arguments('-Ddefault_library=static', language : 'cpp')
-  add_global_arguments('-Ddefault_library=static', language : 'c')
+  add_global_arguments('-Ddefault_library=shared', language : 'cpp')
+  add_global_arguments('-Ddefault_library=shared', language : 'c')
 endif
 
 if host_machine.system() == 'linux'

@@ -32,10 +32,10 @@ if [[ $OSTYPE == 'darwin'* ]]
           else
             create-dmg application.dmg "$package" 
         fi
-fi
-  
+  fi
 
-else
+else if [[ $OSTYPE == 'linux'* ]]
+  then
   if [ -d "$build_dir" ]
     then
       meson setup _build --wipe
@@ -58,7 +58,30 @@ else
             fi
         fi
     fi
-fi
 
- 
+
+elif [[ $OSTYPE == 'msys'* ]]
+then
+  if [ -d "$build_dir" ]
+    then
+      meson setup _build --wipe
+    else
+      meson setup _build
+    fi
+
+    if [ -d "$build_dir" ] && cd _build && meson compile
+      then 
+        if [ "$1" == "run" ]
+          then
+            mkdir -p "$build_dir/output/" 
+            if meson install --destdir="./output"
+              then
+                cd "output"
+                ldd ./application | grep -v WINDOWS | awk 'NF == 4 { system("cp " $3 ".") }'
+                ./application
+            fi
+        fi
+    fi
+fi
+fi
 
