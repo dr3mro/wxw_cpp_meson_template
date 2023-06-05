@@ -77,7 +77,7 @@ then
             if meson install --destdir="./output"
               then
                 cd "output"
-                ldd ./application | grep -v WINDOWS | awk 'NF == 4 { system("cp " $3 ".") }'
+                ldd ./application | grep -v WINDOWS | awk 'NF == 4 { system("cp " $3 " .") }'
                 ./application
             fi
         fi

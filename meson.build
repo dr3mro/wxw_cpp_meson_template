@@ -1,6 +1,8 @@
 project ('application','cpp', version : '0.1', default_options : ['c_std=c11', 'cpp_std=c++17'])
-message(host_machine.system())
 if host_machine.system() == 'windows'
+  message('Configuring for : ' + host_machine.system())
+  add_project_link_arguments('-Wl,--rpath,.',language:'cpp')
+
   add_project_link_arguments('-DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake',language:'cpp')
   add_project_link_arguments('-DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake',language:'c')
   
@@ -9,6 +11,8 @@ if host_machine.system() == 'windows'
 endif
 
 if host_machine.system() == 'linux'
+  message('Configuring for : ' + host_machine.system())
+
   add_project_link_arguments('-Wl,--rpath,../lib64/',language:'cpp')
   
   add_project_link_arguments('-DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake',language:'cpp')
@@ -20,6 +24,8 @@ endif
 
 
 if host_machine.system() == 'darwin'
+  message('Configuring for : ' + host_machine.system())
+
   add_project_link_arguments('-DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake',language:'cpp')
   add_project_link_arguments('-DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake',language:'c')
   
